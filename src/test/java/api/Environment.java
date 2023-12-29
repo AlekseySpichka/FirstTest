@@ -3,7 +3,6 @@ package api;
 import api.pojo.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Environment {
 
