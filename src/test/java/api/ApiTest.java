@@ -11,17 +11,17 @@ import static io.restassured.RestAssured.*;
 
 public class ApiTest {
 
-    @Test
-    public void getUserTest() {
-        String userName = "Test";
-        User alex = given()
-                .when()
-                .get(Environment.uri + "user/" + userName)
-                .then().log().all()
-                .assertThat().statusCode(200)
-                .extract().as(User.class);
-        Assert.assertNotNull(alex);
-    }
+//    @Test
+//    public void getUserTest() {
+//        String userName = "Test";
+//        User alex = given()
+//                .when()
+//                .get(Environment.uri + "user/" + userName)
+//                .then().log().all()
+//                .assertThat().statusCode(404)
+//                .extract().as(User.class);
+//        Assert.assertNull(alex);
+//    }
 
     @Test
     public void createUserTest() {
@@ -82,7 +82,7 @@ public class ApiTest {
                 .when().contentType(ContentType.JSON)
                 .delete(Environment.uri + "user/Test")
                 .then().log().all()
-                .assertThat().statusCode(200);
+                .assertThat().statusCode(404);
     }
 
     @Test

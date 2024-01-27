@@ -1,13 +1,13 @@
 package api;
 
 import api.pojo.Pet;
-import com.github.javafaker.File;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import org.junit.Test;
+import java.io.File;
+
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.request;
+
 
 public class PetApiTest {
 
@@ -55,7 +55,7 @@ public class PetApiTest {
     public void findPetById() {
         given()
                 .when().contentType(ContentType.JSON)
-                .get(Environment.uri + "pet/9223372016900017000")
+                .get(Environment.uri + "pet/9223372036854762424")
                 .then().log().all()
                 .assertThat().statusCode(200);
     }
@@ -64,21 +64,21 @@ public class PetApiTest {
     public void updatePetWithFormDataTest() {
         given()
                 .when().contentType(ContentType.URLENC)
-                .formParam("name", "kot", "status", "sold")
-                .post(Environment.uri + "pet/9223372016900017000")
+                .formParam("name", "kot")
+                .formParam("status", "sold")
+                .post(Environment.uri + "pet/9223372036854762424")
                 .then().log().all()
                 .assertThat().statusCode(200);
     }
 
     @Test
     public void uploadImage() {
-        String filePath = "/Загрузки/Без названия.jpg";
-        String uploadEndpoint = Environment.uri;
-        File fileToUpload = new File(filePath);
+        String filePath = "C:\\Users\\Леха\\IdeaProjects\\FirstTest\\src\\main\\resouces\\kartinka.jpg";
         given()
-                .multiPart(fileToUpload)
-                .when().contentType(ContentType.MULTIPART)
-                .post(uploadEndpoint + "pet/9223372036854762424/uploadImage")
+                .multiPart(new File(filePath))
+                .formParam("additionalMetadata", "12345")
+                .when().contentType("multipart/form-data")
+                .post(Environment.uri + "pet/9223372036854762424/uploadImage")
                 .then().log().all()
                 .assertThat().statusCode(200);
     }
