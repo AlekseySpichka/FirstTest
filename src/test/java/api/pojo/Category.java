@@ -1,6 +1,6 @@
 package api.pojo;
 
 public class Category {
-    public static Long id;
-    public static String name;
+    public Long id;
+    public String name;
 }

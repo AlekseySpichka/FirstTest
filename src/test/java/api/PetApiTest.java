@@ -73,7 +73,7 @@ public class PetApiTest {
 
     @Test
     public void uploadImage() {
-        String filePath = "C:\\Users\\Леха\\IdeaProjects\\FirstTest\\src\\main\\resouces\\kartinka.jpg";
+        String filePath = "src/main/resouces/kartinka.jpg";
         given()
                 .multiPart(new File(filePath))
                 .formParam("additionalMetadata", "12345")
