@@ -12,5 +12,12 @@ public class Pet {
     public List<String> photoUrls;
     public List<Tag> tags;
     public String status;
+
+    public Pet() {
+        Faker a = new Faker(Locale.ENGLISH);
+        id = a.number().randomNumber();
+        name = a.name().username();
+        status = ;
+    }
 }
 
