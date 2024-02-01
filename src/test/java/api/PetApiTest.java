@@ -1,6 +1,5 @@
 package api;
 
-import api.pojo.ApiResponse;
 import api.pojo.Pet;
 import io.restassured.http.ContentType;
 import net.bytebuddy.build.Plugin;
@@ -100,6 +99,6 @@ public class PetApiTest {
                 .get(Environment.uri + "pet/findByStatus?status=available")
                 .then().assertThat().statusCode(200)
                 .extract().as(ArrayList.class);
-    return (Long) list.get(0).get("id");
+        return (Long) list.get(0).get("id");
     }
 }
