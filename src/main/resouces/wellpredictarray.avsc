@@ -1,0 +1,53 @@
+{
+    "doc": "Расчеты по добыче из скважины",
+    "name": "wellpredictarrtest",
+    "type": "record",
+    "fields": [
+        {
+            "doc": "Уникальное имя скважины",
+            "name": "well_id",
+            "type": "string"
+        },
+        {
+            "doc": "дебит т/сут.",
+            "name": "wor",
+            "type": "float"
+        },
+        {
+            "doc": "процент обводнённости",
+            "name": "water_encroachment",
+            "type": "int"
+        },
+        {
+            "doc": "газовый фактор м3/т",
+            "name": "gas_oil_ratio",
+            "type": "int"
+        },
+        {
+            "name": "temperature_points",
+            "type": {
+                "type": "array",
+                "items": {
+                    "name": "temperaturepoint",
+                    "type": "record",
+                    "fields": [
+                        {
+                            "name": "depth",
+                            "type": [
+                                "null",
+                                "double"
+                            ]
+                        },
+                        {
+                            "name": "temperature",
+                            "type": [
+                                "null",
+                                "double"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-package main;
+package otherTests;
 
 import com.codeborne.selenide.*;
 import org.junit.After;
