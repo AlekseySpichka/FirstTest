@@ -1,4 +1,4 @@
-package main;
+package UI_tests.streaming;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -13,7 +13,7 @@ import java.util.Locale;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class CreateStreamingDataSourceTest {
+public class CreateDatasource {
 
     Faker a = new Faker(Locale.ENGLISH);
     String filePath = "src/main/resouces/wellpredictarray.avsc";
@@ -30,16 +30,26 @@ public class CreateStreamingDataSourceTest {
 
     @Test
     public void createStreamingDataSource() {
-        $("div.Layout-module_container_8Mz53yHNml > header > ul > li:nth-child(2)").click();
+        $("a[href=\"/data-sources\"]").click();
         $("span.Button-Label").click();
+
+        //Выбираем формат
         $("div.AddDataSourceeModal-module_card_list_01S7mq3ZLF > div:nth-child(1)").shouldHave(text("Потоковая передача данных")).click();
-        $("button.Button_size_m.Button_view_primary").click();
-        $("div.TextField_width_default > div > div > input").shouldBe(visible).click();
-        $("div.TextField_width_default > div > div > input").shouldBe(enabled).sendKeys("str_test_auto_" + a.number().randomNumber());
-        $("button.Button_size_m.Button_view_primary.MixFocus").click();
-        $("section > div > div > div > input").uploadFile(new File(filePath));
-        $("div.UploadStreamingFile-module_actions_eKgYdA0w20 > button.Button_view_primary").click();
-        $("button.Button_size_m.Button_view_primary.MixFocus").click();
+        $("button[type=\"submit\"]").click();
+
+        //Вводим название источника и описание
+        $("input[placeholder=\"Название источника данных\"]").shouldBe(visible).click();
+        $("input[placeholder=\"Название источника данных\"]").shouldBe(enabled).sendKeys("str_test_auto_" + a.number().numberBetween(0, 100));
+        $("textarea.TextField-Input").shouldBe(visible).click();
+        $("textarea.TextField-Input").shouldBe(enabled).sendKeys("Description" + a.number().randomNumber());
+        $("button[type=\"submit\"]").click();
+
+        //Загружаем файл
+        $("Input[type=\"file\"]").uploadFile(new File(filePath));
+        $("button[type=\"submit\"]").click();
+
+        //Добавляем источник
+        $("button[type=\"submit\"]").click();
     }
 
 
