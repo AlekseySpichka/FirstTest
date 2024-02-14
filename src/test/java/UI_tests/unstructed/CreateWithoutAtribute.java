@@ -10,9 +10,10 @@ import org.junit.Test;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Selenide.$;
 
-public class CreateWithAttribute {
+public class CreateWithoutAtribute {
 
     Faker a = new Faker(Locale.ENGLISH);
 
@@ -27,7 +28,7 @@ public class CreateWithAttribute {
     }
 
     @Test
-    public void createUnstructedDataSource() {
+    public void createUnstructuredDatasource() {
         $("a[href=\"/data-sources\"]").click();
         $("span.Button-Label").click();
 
@@ -42,25 +43,6 @@ public class CreateWithAttribute {
         $("textarea.TextField-Input").shouldBe(enabled).sendKeys("Description" + a.number().randomNumber());
         $("button[type=\"submit\"]").click();
 
-        // Добавляем и заполняем атрибут с типом данных "Текст"
-        $("div:nth-child(4) > button").shouldBe(visible).click();
-        $("input[name=\"userAttribute.0.name\"]").shouldBe(enabled).sendKeys("UserAttributeText");
-        $("input[name=\"userAttribute.0.doc\"]").shouldBe(enabled).sendKeys("DescriptionText" + a.number().randomNumber());
-
-        // Добавляем и заполняем атрибут с типом данных "Дата"
-        $("div:nth-child(4) > button").shouldBe(visible).click();
-        $("input[name=\"userAttribute.1.type\"]").click();
-        $("div.AddUserAttributes-module_option_item_active_JwkQ8h7FFo").click();
-        $("input[name=\"userAttribute.1.name\"]").shouldBe(enabled).sendKeys("UserAttributeDate");
-        $("input[name=\"userAttribute.1.doc\"]").shouldBe(enabled).sendKeys("DescriptionDate" + a.number().randomNumber());
-
-        // Добавляем и заполняем атрибут с типом данных "Число"
-        $("div:nth-child(4) > button").shouldBe(visible).click();
-        $("input[name=\"userAttribute.2.type\"]").click();
-        $("div.AddUserAttributes-module_option_item_hovered_GRnVa6Hfpw").click();
-        $("input[name=\"userAttribute.2.name\"]").shouldBe(enabled).sendKeys("UserAttributeNumber");
-        $("input[name=\"userAttribute.2.doc\"]").shouldBe(enabled).sendKeys("DescriptionNumber" + a.number().randomNumber());
-
         // Добавляем источник
         $("button[type=\"submit\"]").click();
     }
@@ -70,5 +52,6 @@ public class CreateWithAttribute {
     public void tearDown() {
         Selenide.closeWebDriver();
     }
+
 
 }

@@ -1,4 +1,4 @@
-package UI_tests.structed;
+package UI_tests.las;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.*;
@@ -16,7 +15,6 @@ import static com.codeborne.selenide.Selenide.$;
 public class CreateDatasource {
 
     Faker a = new Faker(Locale.ENGLISH);
-    String filePath = "src/main/resouces/schema (1).xlsx";
 
     @Before
     public void setup() {
@@ -29,24 +27,21 @@ public class CreateDatasource {
     }
 
     @Test
-    public void createStructuredDatasource() {
+    public void createLasDatasource() {
         $("a[href=\"/data-sources\"]").click();
         $("span.Button-Label").click();
 
-        //Выбираем формат
-        $("div.AddDataSourceeModal-module_card_list_01S7mq3ZLF > div:nth-child(3)").shouldHave(text("Структурированный формат")).click();
+        // Выбираем формат
+        $("div.AddDataSourceeModal-module_card_list_01S7mq3ZLF > div:nth-child(5)").shouldHave(text("Специализированный формат")).click();
         $("button[type=\"submit\"]").click();
+
+        // Вводим название источника и описание
         $("input[placeholder=\"Название источника данных\"]").shouldBe(visible).click();
-        $("input[placeholder=\"Название источника данных\"]").shouldBe(enabled).sendKeys("sf_test_auto_" + a.number().numberBetween(0, 100));
+        $("input[placeholder=\"Название источника данных\"]").shouldBe(enabled).sendKeys("las_test_auto_" + a.number().numberBetween(0, 100));
         $("textarea.TextField-Input").shouldBe(visible).click();
         $("textarea.TextField-Input").shouldBe(enabled).sendKeys("Description" + a.number().randomNumber());
-        $("button[type=\"submit\"]").click();
 
-        //Загружаем файл
-        $("Input[type=\"file\"]").uploadFile(new File(filePath));
-        $("button[type=\"submit\"]").click();
-
-        //Страница превью файла
+        // Добавляем источник
         $("button[type=\"submit\"]").click();
     }
 
@@ -55,5 +50,7 @@ public class CreateDatasource {
     public void tearDown() {
         Selenide.closeWebDriver();
     }
+
+
 
 }

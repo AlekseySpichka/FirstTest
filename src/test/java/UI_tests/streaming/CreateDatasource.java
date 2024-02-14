@@ -29,7 +29,7 @@ public class CreateDatasource {
     }
 
     @Test
-    public void createStreamingDataSource() {
+    public void createStreamingDatasource() {
         $("a[href=\"/data-sources\"]").click();
         $("span.Button-Label").click();
 
