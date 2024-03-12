@@ -2,9 +2,7 @@ package api;
 
 import api.pojo.User;
 import io.restassured.http.ContentType;
-import org.junit.Assert;
 import org.junit.Test;
-import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;
